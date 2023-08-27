@@ -13,15 +13,17 @@ const Form = ({ onSuccess, onError }) => {
     async (evt) => {
       evt.preventDefault();
       setSending(true);
+      // rénitialisation du formulaire
+      evt.target.reset();
       // We try to call mockContactApi
       try {
           await mockContactApi();
           setSending(false);
-          console.log("OK");
+          // Affiche le message d'envoi
+          onSuccess()
       } catch (err) {
         setSending(false);
         onError(err);
-        console.log(err)
       }
     },
     [onSuccess, onError]

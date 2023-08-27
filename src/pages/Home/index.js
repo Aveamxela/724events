@@ -13,7 +13,12 @@ import Modal from "../../containers/Modal";
 import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
-  const {last} = useData()
+  const {data} = useData()
+  // Trier les dates des plus récentes au plus anciennes
+  const last = data?.events.sort((evtA, evtB) =>
+    new Date(evtA.date) > new Date(evtB.date) ? -1 : 1)
+    // Afficher le premier élément du tableau
+    [0];
   return <>
     <header>
       <Menu />
