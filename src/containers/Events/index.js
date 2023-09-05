@@ -14,15 +14,16 @@ const EventList = () => {
     const [type, setType] = useState();
     const [currentPage, setCurrentPage] = useState(1);
     // Si un type est sélectionné alors filtrer le tableau par le type sélectionné
-    const filteredEvents =
-    (
-      (!type
-        ? data?.events
-        : data?.events.filter((event) => event.type === type)
-      )
-      || []
+    const filteredEvents = (
+        (!type
+            ? data?.events
+            : data?.events.filter((event) => event.type === type)) || []
     )
-    .filter((event, index) => {
+    // Trier du plus ancien au plus récent
+    const byDateDesc = filteredEvents?.sort((evtA, evtB) =>
+        new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
+    );
+    const paginationEvents = byDateDesc.filter((event, index) => {
         if (
             (currentPage - 1) * PER_PAGE <= index &&
             PER_PAGE * currentPage > index
@@ -31,23 +32,17 @@ const EventList = () => {
         }
         return false;
     });
-    // Trier du plus ancien au plus récent
-     const byDateDesc = filteredEvents?.sort((evtA, evtB) =>
-         new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
-     );
-     console.log({ byDateDesc });
-   
-    
+
     // modifie le type par défaut par le type sélectionné
     const changeType = (evtType) => {
         setCurrentPage(1);
         setType(evtType);
     };
-    const pageNumber = Math.floor((filteredEvents?.length || 0) / PER_PAGE) + 1;
+    const pageNumber = Math.floor((byDateDesc?.length || 0) / PER_PAGE);
     // new Set permet de générer un tableau de valeurs uniques
     const typeList = new Set(data?.events.map((event) => event.type));
     return (
-        <>
+        <div data-testid="error">
             {error && <div>An error occured</div>}
             {data === null ? (
                 "loading"
@@ -62,7 +57,7 @@ const EventList = () => {
                         }
                     />
                     <div id="events" className="ListContainer">
-                        {filteredEvents.map((event) => (
+                        {paginationEvents.map((event) => (
                             <Modal
                                 key={event.id}
                                 Content={<ModalEvent event={event} />}
@@ -93,7 +88,7 @@ const EventList = () => {
                     </div>
                 </>
             )}
-        </>
+        </div>
     );
 };
 

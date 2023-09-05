@@ -6,6 +6,7 @@ import {
     useEffect,
     useState,
 } from "react";
+import { act } from "react-dom/test-utils";
 
 const DataContext = createContext({});
 
@@ -22,7 +23,11 @@ export const DataProvider = ({ children }) => {
         try {
             setData(await api.loadData());
         } catch (err) {
-            setError(err);
+            // Pour résoudre une erreur, utiliser act pour préparer le composant aux assertions
+            // act() permet d exécuter le test dans un environnement proche de celui de React dans le navigateur
+            act(() => {
+                setError(err);
+            })
         }
     }, []);
     useEffect(() => {
@@ -36,6 +41,7 @@ export const DataProvider = ({ children }) => {
                 data,
                 error,
             }}
+            
         >
             {children}
         </DataContext.Provider>

@@ -25,11 +25,11 @@ describe("When a data context is created", () => {
         const { error } = useData();
         return <div>{error}</div>;
       };
-      render(
-        <DataProvider>
-          <Component />
-        </DataProvider>
-      );
+          render(
+              <DataProvider>
+                  <Component />
+              </DataProvider>
+          );
       const dataDisplayed = await screen.findByText("error on calling events");
       expect(dataDisplayed).toBeInTheDocument();
     });
