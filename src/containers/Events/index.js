@@ -47,7 +47,7 @@ const EventList = () => {
             {data === null ? (
                 "loading"
             ) : (
-                <>
+                <div data-testid="center-realisations">
                     <h3 className="SelectTitle">Catégories</h3>
                     <Select
                         selection={Array.from(typeList)}
@@ -86,7 +86,7 @@ const EventList = () => {
                             </a>
                         ))}
                     </div>
-                </>
+                </div>
             )}
         </div>
     );

@@ -7,7 +7,10 @@ import Button, { BUTTON_TYPES } from "../../components/Button";
 const mockContactApi = () => new Promise((resolve) => { setTimeout(resolve, 1000); })
 
 const Form = ({ onSuccess, onError }) => {
-  const [sending, setSending] = useState(false);
+const [sending, setSending] = useState(false);
+// État pour réinitialiser les options du Select
+const [resetOptions, setResetOptions] = useState(false);
+
 
   const sendContact = useCallback(
     async (evt) => {
@@ -15,6 +18,9 @@ const Form = ({ onSuccess, onError }) => {
       setSending(true);
       // rénitialisation du formulaire
       evt.target.reset();
+    //   Déclenche la réinitialisation des options du Select
+        setResetOptions(true);
+
       // We try to call mockContactApi
       try {
           await mockContactApi();
@@ -30,32 +36,34 @@ const Form = ({ onSuccess, onError }) => {
   );
 
   return (
-    <form onSubmit={sendContact}>
-      <div className="row">
-        <div className="col">
-          <Field placeholder="" label="Nom" />
-          <Field placeholder="" label="Prénom" />
-          <Select
-            selection={["Personel", "Entreprise"]}
-            onChange={() => null}
-            label="Personel / Entreprise"
-            type="large"
-            titleEmpty
-          />
-          <Field placeholder="" label="Email" />
-          <Button type={BUTTON_TYPES.SUBMIT} disabled={sending}>
-            {sending ? "En cours" : "Envoyer"}
-          </Button>
-        </div>
-        <div className="col">
-          <Field
-            placeholder="message"
-            label="Message"
-            type={FIELD_TYPES.TEXTAREA}
-          />
-        </div>
-      </div>
-    </form>
+      <form onSubmit={sendContact}>
+          <div className="row">
+              <div className="col">
+                  <Field placeholder="" label="Nom" />
+                  <Field placeholder="" label="Prénom" />
+                  <Select
+                      selection={["Personel", "Entreprise"]}
+                      onChange={() => null}
+                    //   Prop pour réinitialiser les options du Select
+                      resetOptions={resetOptions}
+                      label="Personel / Entreprise"
+                      type="large"
+                      titleEmpty
+                  />
+                  <Field placeholder="" label="Email" />
+                  <Button type={BUTTON_TYPES.SUBMIT} disabled={sending}>
+                      {sending ? "En cours" : "Envoyer"}
+                  </Button>
+              </div>
+              <div className="col">
+                  <Field
+                      placeholder="message"
+                      label="Message"
+                      type={FIELD_TYPES.TEXTAREA}
+                  />
+              </div>
+          </div>
+      </form>
   );
 };
 

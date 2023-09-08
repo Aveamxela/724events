@@ -1,7 +1,8 @@
 .SelectTitle {
   color: white;
 }
-[data-testid="error"]{
+
+[data-testid="error"], [data-testid="center-realisations"]{
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -30,16 +30,24 @@ describe("When Form is created", () => {
 });
 
 describe("When a page is created", () => {
-    it("a list of events is displayed", () => {
-        // to implement
+    it("a list of events is displayed", async () => {
+        render (<Home/>)
+        const realisations = await screen.findByTestId("center-realisations");
+        expect(realisations).toBeInTheDocument()
     });
-    it("a list a people is displayed", () => {
-        // to implement
+    it("a list a people is displayed", async() => {
+        const {container} = render (<Home/>)
+        const peopleCard = container.querySelector(".PeopleCard");
+        expect(peopleCard).toBeInTheDocument();
     });
-    it("a footer is displayed", () => {
-        // to implement
+    it("a footer is displayed", async() => {
+        render (<Home/>)
+        const footer = await screen.findByTestId("footer");
+        expect(footer).toBeInTheDocument();
     });
-    it("an event card, with the last event, is displayed", () => {
-        // to implement
+    it("an event card, with the last event, is displayed", async () => {
+        render (<Home/>)
+        const lastEvent = await screen.findByTestId("card-testid");
+         expect(lastEvent).toBeInTheDocument();
     });
 });
