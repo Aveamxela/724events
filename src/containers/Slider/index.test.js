@@ -57,13 +57,13 @@ describe("Slide change automaticaly after 5s", () => {
             </DataProvider>
         );
         //  pour attendre que les données soient chargées
-        await new Promise((r) => setTimeout(r, 2000));
+        await new Promise((r) => {setTimeout(r, 2000)});
 
         //  ici notre composant etre pret a etre testé
         const slide = document.querySelector(".SlideCard--display");
         getByText(slide, "World Farming Day");
         
-        await new Promise((r) => setTimeout(r, 4000));
+        await new Promise((r) => {setTimeout(r, 4000)});
         
         const nextSlide = document.querySelector(".SlideCard--display");
         getByText(nextSlide, "World economic forum");

@@ -25,5 +25,14 @@ describe("When Events is created", () => {
             await waitFor(() => screen.findByText("Envoyer"),{timeout:2000}); 
             expect(onSuccess).toHaveBeenCalled();
         });
+         it("the form is reset", async () => {
+           const {container} = render(<Form />);
+            const texts = screen.getAllByRole ("textbox")
+            texts.forEach(text => expect (text).toHaveValue(""))
+
+            const select = container.querySelector(`input[name="select"]`);
+            expect(select).toHaveValue("")
+         });
     });
+    
 });
