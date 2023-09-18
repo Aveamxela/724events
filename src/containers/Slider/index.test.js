@@ -59,7 +59,7 @@ describe("Slide change automaticaly after 5s", () => {
         //  pour attendre que les données soient chargées
         await new Promise((r) => {setTimeout(r, 2000)});
 
-        //  ici notre composant etre pret a etre testé
+        //  ici notre composant est pret a etre testé
         const slide = document.querySelector(".SlideCard--display");
         getByText(slide, "World Farming Day");
         

@@ -18,7 +18,7 @@ const Select = ({
     const [value, setValue] = useState();
     const [collapsed, setCollapsed] = useState(true);
     const changeValue = (newValue) => {
-        // ajout argument a onChange
+        // ajout argument a onChange pr informer le parent de la nvl valeur selectionnée
         onChange(newValue);
         setValue(newValue);
         // Mettre collapsed à true pour masquer les options

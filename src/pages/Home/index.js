@@ -17,7 +17,7 @@ const Page = () => {
   // Trier les dates des plus récentes au plus anciennes
   const last = data?.events.sort((evtA, evtB) =>
     new Date(evtA.date) > new Date(evtB.date) ? -1 : 1)
-    // Afficher le premier élément du tableau
+    // Obtenir le dernier événement réalisé
     [0];
   return (
       <>
@@ -129,15 +129,18 @@ const Page = () => {
               </div>
           </main>
           <footer className="row" data-testid="footer">
-              <div className="col presta">
+              <div className="col presta" data-testid="last-event">
                   <h3>Notre dernière prestation</h3>
-                  <EventCard
-                      imageSrc={last?.cover}
-                      title={last?.title}
-                      date={new Date(last?.date)}
-                      small
-                      label="boom"
-                  />
+                  {/* Vérifie si last , last.cover et last.title existe et ne sont pas nuls */}
+                  {last?.cover && last?.title ? (
+                      <EventCard
+                          imageSrc={last?.cover}
+                          title={last?.title}
+                          date={new Date(last?.date)}
+                          small
+                          label="boom"
+                      />
+                  ) : null}
               </div>
               <div className="col contact">
                   <h3>Contactez-nous</h3>

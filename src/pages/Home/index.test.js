@@ -47,7 +47,7 @@ describe("When a page is created", () => {
     });
     it("an event card, with the last event, is displayed", async () => {
         render (<Home/>)
-        const lastEvent = await screen.findByTestId("card-testid");
+        const lastEvent = await screen.findByTestId("last-event");
          expect(lastEvent).toBeInTheDocument();
     });
 });

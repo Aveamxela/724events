@@ -14,7 +14,10 @@ export const MONTHS = {
 };
 
 export const getMonth = (date) => {
+    // Obtient le n° du mois (0 à 11), + 1 pour obtenir le n° réel du mois
     const monthNumber = date.getMonth() + 1;
+    // Utilise le numéro pour accéder à l'élement correspondant
     const monthName = MONTHS[monthNumber];
+    // Retourne le nom du mois
     return monthName;
 };
