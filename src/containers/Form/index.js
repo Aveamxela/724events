@@ -17,8 +17,9 @@ const Form = ({ onSuccess, onError }) => {
     const sendContact = useCallback(
         async (evt) => {
             evt.preventDefault();
+            // indique que l'envoi est en cours
             setSending(true);
-            // rénitialisation du formulaire
+            // rénitialise du formulaire
             evt.target.reset();
             //   Déclenche la réinitialisation des options du Select
             setResetOptions(true);

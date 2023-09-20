@@ -27,10 +27,13 @@ describe("When Events is created", () => {
         });
          it("the form is reset", async () => {
            const {container} = render(<Form />);
+            // récupère tous les champs de texte
             const texts = screen.getAllByRole ("textbox")
+            // vérifie si chaque champ a une valeur vide
             texts.forEach(text => expect (text).toHaveValue(""))
-
+            // récupère le champ de sélection
             const select = container.querySelector(`input[name="select"]`);
+            // vérifie si le champ est vide 
             expect(select).toHaveValue("")
          });
     });
