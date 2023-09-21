@@ -33,6 +33,7 @@ const Slider = () => {
     // changement de la slide en fonction du bouton radio cliqué
     const changeSlide = (event) => {
         setIndex(event);
+        clearTimeout(time);
     };
 
     return (
